@@ -2,6 +2,7 @@ import '../App.css'
 import {v4 as uuidv4} from 'uuid'
 import { useState } from 'react'
 import DataContext from './2Data'
+import Report from './2Report'
 import FormInput from './2FormInput'
 import PayLists from './2PayLists'
 
@@ -14,13 +15,14 @@ function Spendee() {
     ]
     
     const [items, setItems] = useState(DATASET)
-    const updateItem = (newItem) => {
+    const updateItem = (newItem) => { //FormInput Fn
         setItems((prevItem) => [newItem, ...prevItem]) //or use DATASET
     }
 
     return(
         <DataContext.Provider value={items}>
             <h1 style={header}>Spendee Cards</h1>
+            <Report />
             <FormInput addNewData = {updateItem} />
             <PayLists dataArr = {items} />
         </DataContext.Provider>

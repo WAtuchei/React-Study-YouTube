@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import DataContext from './2Data'
 import Items from './2Items'
 
-const PayLists = (props) => {
+const PayLists = () => {
     // const {dataArr} = props
     const contextData = useContext(DataContext)
 

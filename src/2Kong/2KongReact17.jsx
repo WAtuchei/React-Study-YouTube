@@ -5,6 +5,7 @@ import DataContext from './2Data'
 import Report from './2Report'
 import FormInput from './2FormInput'
 import PayLists from './2PayLists'
+import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom'
 
 function Spendee() {
     const header = {color: 'red'}
@@ -19,7 +20,7 @@ function Spendee() {
         setItems((prevItem) => [newItem, ...prevItem]) //or use DATASET
     }
 
-    const [showReport, setShowReport] = useState(false)
+    const [showReport, setShowReport] = useState(true)
     const reducer = (state, action) => { //Reducer is switch
         switch (action.type) {
             case "SHOW" :
@@ -28,16 +29,35 @@ function Spendee() {
                 return setShowReport(false)
         }
     }
-    const [state, dispatch] = useReducer(reducer, showReport)
-
+    // Reducer
+    const [state, dispatchFn] = useReducer(reducer, showReport)
     return(
         <DataContext.Provider value={items}>
             <h1 style={header}>Spendee Cards</h1>
-            <button onClick={() => dispatch({type:"SHOW"})}>Show Result</button>
-            <button onClick={() => dispatch({type:"HIDE"})}>Hide Result</button>
-            {showReport && <Report />}
-            <FormInput addNewData = {updateItem} />
-            <PayLists dataArr = {items} />
+            
+            <Router>
+                <ul className='BrowserNav'>
+                    <Link to="/">Report Page</Link>
+                    <Link to="/add">Transaction Page</Link>
+                </ul>                
+                <Routes>
+                    <Route path="/" element={
+                        <>
+                            {showReport && <Report />}
+                            <button onClick={() => dispatchFn({type:"SHOW"})}>Show Result</button>
+                            <button onClick={() => dispatchFn({type:"HIDE"})}>Hide Result</button>
+                        </>                        
+                        }>
+                    </Route>
+                    <Route path="/add" element={
+                        <>
+                            <FormInput addNewData = {updateItem} />
+                            <PayLists dataArr = {items} />
+                        </>
+                        }>
+                    </Route>
+                </Routes>            
+            </Router>            
         </DataContext.Provider>
     )
     //if PayLists useContext, attributes and props not necessary

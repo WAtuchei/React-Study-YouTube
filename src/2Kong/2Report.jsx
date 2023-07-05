@@ -16,8 +16,8 @@ function Report() {
     return (
         <>
             <br />
-            <h3>รายรับ : <span style={red}>{income}</span></h3>
-            <h3>รายจ่าย : <span style={green}>{expense}</span></h3>
+            <h3>รายรับ : <span style={green}>{income}</span></h3>
+            <h3>รายจ่าย : <span style={red}>{expense}</span></h3>
             <br />
             <h3>ส่วนต่าง : <span style={diffStyle}>{diff}</span></h3>
         </>

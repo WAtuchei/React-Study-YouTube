@@ -13,13 +13,17 @@ function Report() {
         green = {color: 'lime'}
     const diffStyle = diff < 0 ? red : green
 
+    const formatNumber = (number) => {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
     return (
         <>
             <br />
-            <h3>รายรับ : <span style={green}>{income}</span></h3>
-            <h3>รายจ่าย : <span style={red}>{expense}</span></h3>
+            <h3>รายรับ : <span style={green}>{formatNumber(income)}</span></h3>
+            <h3>รายจ่าย : <span style={red}>{formatNumber(expense)}</span></h3>
             <br />
-            <h3>ส่วนต่าง : <span style={diffStyle}>{diff}</span></h3>
+            <h3>ส่วนต่าง : <span style={diffStyle}>{formatNumber(diff)}</span></h3>
         </>
     )
 }

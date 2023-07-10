@@ -5,14 +5,14 @@ import DataContext from './2Data'
 import Report from './2Report'
 import FormInput from './2FormInput'
 import PayLists from './2PayLists'
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom'
 
 function Spendee() {
     const header = {color: 'red'}
     const DATASET = [
-        {id: uuidv4(), title: 'Hospital', amount: -20000},
-        {id: uuidv4(), title: 'Fuel', amount: 6000},
-        {id: uuidv4(), title: 'Food', amount: 12000},
+        {id: uuidv4(), title: 'Ex Hospital', amount: -20000},
+        {id: uuidv4(), title: 'Ex Fuel', amount: 6000},
+        {id: uuidv4(), title: 'Ex Food', amount: 12000},
     ]
     
     const [items, setItems] = useState(DATASET)
@@ -20,6 +20,7 @@ function Spendee() {
         setItems((prevItem) => [newItem, ...prevItem]) //or use DATASET
     }
 
+    // Reducer
     const [showReport, setShowReport] = useState(true)
     const reducer = (state, action) => { //Reducer is switch
         switch (action.type) {
@@ -29,19 +30,19 @@ function Spendee() {
                 return setShowReport(false)
         }
     }
-    // Reducer
     const [state, dispatchFn] = useReducer(reducer, showReport)
+    
     return(
         <DataContext.Provider value={items}>
             <h1 style={header}>Spendee Cards</h1>
             
             <Router>
                 <ul className='BrowserNav'>
-                    <Link to="/">Report Page</Link>
-                    <Link to="/add">Transaction Page</Link>
+                    <NavLink to="/">Report Page</NavLink>
+                    <NavLink to="/add">Transaction Page</NavLink>
                 </ul>                
                 <Routes>
-                    <Route path="/" element={
+                    <Route end path="/" element={
                         <>
                             {showReport && <Report />}
                             <button onClick={() => dispatchFn({type:"SHOW"})}>Show Result</button>

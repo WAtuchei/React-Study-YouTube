@@ -1,6 +1,6 @@
 import '../App.css'
 import {v4 as uuidv4} from 'uuid'
-import { useReducer, useState } from 'react'
+import { React, useReducer, useState } from 'react'
 import DataContext from './2Data'
 import Report from './2Report'
 import FormInput from './2FormInput'

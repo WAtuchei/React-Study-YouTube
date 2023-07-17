@@ -1,5 +1,5 @@
 import '../App.css'
-import { useContext } from 'react'
+import { React, useContext } from 'react'
 import DataContext from './2Data'
 import Items from './2Items'
 
